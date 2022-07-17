@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     path('pitagoras', views.pitagoras),
+    path('', views.index)
 ]

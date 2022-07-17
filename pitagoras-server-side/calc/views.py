@@ -1,5 +1,5 @@
 import json
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 import math 
@@ -36,3 +36,7 @@ def pitagoras(request):
         "cat2": cat2,
         "hip": hip
     })
+
+
+def index():
+    return HttpResponse("It's working!")
