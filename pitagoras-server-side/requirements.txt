@@ -20,3 +20,4 @@ termcolor==1.1.0
 tzdata==2022.1
 Werkzeug==2.1.2
 whitenoise==6.2.0
+gunicorn==20.1.0
