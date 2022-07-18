@@ -9,5 +9,5 @@ A API, ao receber via requisição HTTP um objeto contendo dois dos lados do tri
 Abaixo, uma demonstração de como o site funciona e você pode acessar o deploy neste link: https://pitagoras-nathanlmsilva-gmailcom.vercel.app/ .
 
 
-<img src="./" width="800" height="450" />
+<img src="https://raw.githubusercontent.com/nathanmaciel/pitagoras/main/Loom%20Message%20-%2018%20July%202022.gif" width="800" height="450" />
 
