@@ -17,12 +17,24 @@ export default function Input(){
     })
 
     function handleChange(event){
-        const {name, value} = event.target
+        let {name, value} = event.target
         setFormData((prevFormData) => {
             return {
             ...prevFormData,
             [name]: Number(value)
         }})
+    }
+
+    function preventZero(event){
+        console.log(event.target)
+        let {name, value} = event.target
+        if(value == 0){
+            setFormData((prevFormData) => {
+                return {
+                ...prevFormData,
+                [name]: ""
+            }})
+        }
     }
 
     function handleCalcClick(){
@@ -65,9 +77,13 @@ export default function Input(){
                             let bool = apiResp.cat1 >= apiResp.cat2
                             let bigger = bool ? apiResp.cat1 : apiResp.cat2
                             let smaller = !bool ? apiResp.cat1 : apiResp.cat2
-                            console.log(apiResp)
-                            console.log(bigger)
-                            setFormData(apiResp)
+
+                            setFormData({
+                                cat1: Number(apiResp.cat1),
+                                cat2: Number(apiResp.cat2),
+                                hip: Number(apiResp.hip)
+                            })
+
                             //Envio dos dados para o componente do desenho
                             setSend({
                                 cat1: Number(apiResp.cat1),
@@ -103,6 +119,8 @@ export default function Input(){
                         name="cat1"
                         value={formData.cat1}
                         onChange={handleChange}
+                        onBlur={preventZero}
+                        min={0}
                     />
                     <button onClick={() => handleClean("cat1")}>Limpar</button>
                 </div>
@@ -115,6 +133,8 @@ export default function Input(){
                         name="cat2"
                         value={formData.cat2}
                         onChange={handleChange}
+                        onBlur={preventZero}
+                        min={0}
                     />
                     <button onClick={() => handleClean("cat2")}>Limpar</button>
                 </div>
@@ -127,19 +147,19 @@ export default function Input(){
                         name="hip"
                         value={formData.hip}
                         onChange={handleChange}
+                        onBlur={preventZero}
+                        min={0}
                     />
                     <button onClick={() => handleClean("hip")}>Limpar</button>
                 </div>
-                <div className="buttons">
                     <button
                         type="button"
+                        style={{marginLeft: "56px"}}
                         onClick={() => {
                             console.log("cliquei")
                             handleCalcClick()
                         }}
                     >Calcular</button>
-                </div>
-                
             </div>
             <Pitagoras
             cat1={send.cat1}
