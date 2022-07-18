@@ -3,6 +3,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('pitagoras', views.pitagoras),
-    path('', views.index)
+    path('pitagoras', views.pitagoras)
 ]

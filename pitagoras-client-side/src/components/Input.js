@@ -16,6 +16,8 @@ export default function Input(){
         styleCalc: 0
     })
 
+    const[loading, setLoading] = React.useState(false)
+
     function handleChange(event){
         let {name, value} = event.target
         setFormData((prevFormData) => {
@@ -42,7 +44,6 @@ export default function Input(){
                     //Primeiro, é necessário conferir se as entradas são válidas
 
         // Caso inválido: 1 ou 3 lados preenchidos
-        console.log("calcular!")
         let filled = {
             cat1: formData.cat1 !== "",
             cat2: formData.cat2 !== "",
@@ -60,6 +61,7 @@ export default function Input(){
                return alert("Hipotenusa precisa ser maior que os catetos")
             }
         }
+        setLoading(true)
 
                 // Quando tem-se entradas válidas, prossegue-se para a requisição do cálculo dos lados do triângulo        
         fetch("https://pitag-server.herokuapp.com/calc/pitagoras", {
@@ -91,12 +93,12 @@ export default function Input(){
                                 hip: Number(apiResp.hip),
                                 styleCalc: (100 - (smaller/bigger)*100)
                             })
+
+                            setLoading(false)
                         })
-        console.log("fim")
     }
 
     function handleClean(name){
-        console.log("limpar")
         setFormData((prevFormData) => {
             return {
                 ...prevFormData,
@@ -104,8 +106,6 @@ export default function Input(){
             }
         })
     }
-
-    console.log(formData)
 
     return(
         <div className="whole-page">
@@ -161,12 +161,14 @@ export default function Input(){
                         }}
                     >Calcular</button>
             </div>
-            <Pitagoras
-            cat1={send.cat1}
-            cat2={send.cat2}
-            hip={send.hip}
-            styleCalc={send.styleCalc}
-            />
+            {( loading && <div class="loader"></div>)}
+            {( !loading && <Pitagoras
+                                cat1={send.cat1}
+                                cat2={send.cat2}
+                                hip={send.hip}
+                                styleCalc={send.styleCalc}
+                            />
+            )}
         </div>
     )
 }

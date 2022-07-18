@@ -6,6 +6,9 @@ import math
 
 # Create your views here.
 
+# pitagoras function receives a object as body, containing keys for "cat1", "cat2" and "hip", and one of them
+# must be an empty string, otherwise it won't work
+
 @api_view(['POST'])
 def pitagoras(request):
     sides = json.loads(request.body)
@@ -37,6 +40,3 @@ def pitagoras(request):
         "hip": hip
     })
 
-
-def index():
-    return HttpResponse("It's working!")
